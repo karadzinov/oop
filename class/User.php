@@ -1,7 +1,8 @@
 <?php
 require_once "DB.php";
 
-class User extends DB {
+class User extends DB
+{
 
     private $first_name;
     private $last_name;
@@ -9,11 +10,19 @@ class User extends DB {
     private $email;
     private $image;
     private $password;
+    private $id;
 
+    const TABLE = 'users';
 
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct(self::TABLE);
+    }
+
+
+    public static function mnozenje($a, $b)
+    {
+        return $a * $b;
     }
 
     /**
@@ -21,6 +30,7 @@ class User extends DB {
      */
     public function getLastName()
     {
+
         return $this->last_name;
     }
 
@@ -29,6 +39,7 @@ class User extends DB {
      */
     public function setLastName($last_name)
     {
+
         $this->last_name = $last_name;
     }
 
@@ -97,7 +108,6 @@ class User extends DB {
     }
 
 
-
     public function setFirstName($firstName)
     {
         $this->first_name = $firstName;
@@ -111,7 +121,64 @@ class User extends DB {
         return $this->first_name;
     }
 
+    public function create()
+    {
+        $data = [
+            "first_name" => $this->first_name,
+            "last_name" => $this->last_name,
+            "dob" => $this->dob,
+            "email" => $this->email,
+            "password" => $this->password,
+            "image" => $this->image
+        ];
 
+        $this->id = $this->insert($data);
+
+    }
+
+    public function save()
+    {
+        $data = [
+            "first_name" => $this->first_name,
+            "last_name" => $this->last_name,
+            "dob" => $this->dob,
+            "email" => $this->email,
+            "password" => $this->password,
+            "image" => $this->image
+        ];
+
+
+        $this->update($this->id, $data);
+    }
+
+    public function first($id)
+    {
+       $result = $this->get($id);
+       $this->id = $result->id;
+       $this->first_name = $result->first_name;
+       $this->last_name = $result->last_name;
+       $this->dob = $result->dob;
+       $this->email = $result->email;
+       $this->password = $result->password;
+       $this->image = $result->image;
+
+       return $this;
+    }
+
+    public function delete()
+    {
+        $this->remove($this->id);
+    }
+
+    public function id()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
 
 }

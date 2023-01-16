@@ -1,8 +1,10 @@
 <?php
 require_once "header.php";
-require_once "class/User.php";
-require_once "class/Pets.php";
-require_once "class/DB.php";
+
+spl_autoload_register(function ($class) {
+    include 'class/' . $class . '.php';
+});
+
 ?>
 
     <div class="container">
@@ -12,42 +14,66 @@ require_once "class/DB.php";
 
 
 
-                $martin = new User();
+                $p = new Product();
+
+                $product = $p->first(7);
+
+                var_dump($product->getName());
+                die();
 
 
-                $martin->setFirstName("Martin");
-                $martin->setDob("30-09-1984");
-                $martin->setEmail("martin@pingdevs.com");
-                $martin->setLastName("Karadzinov");
-                $martin->setImage("images/martin.jpg");
-                $martin->setPassword("temp12345");
+                $user = new User();
+                $user->setFirstName("Petko");
+                $user->setLastName("Ilevski");
+                $user->setEmail("mile@ilevski.com");
+                $user->setPassword("temp1234");
+                $user->setDob("1985-03-12");
+                $user->setImage("n/a");
+
+                // $user->create();
 
 
-
-                var_dump($martin->connect());
-
-
-
-
-
-
-
-               // echo $martin->first_name . ' ' . $martin->last_name;
-
-
-                $mache = new Pets('Charli', 'cat');
-                $kuche = new Pets('Nova', 'dog');
-
-                echo $mache->action("meow meow");
-                echo $kuche->action("ciu ciu");
-
-
-
-
+                //  echo $user->id();
 
 
                 ?>
             </div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>DOB</th>
+                    <th>Image</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+
+                $user = new User();
+                $users = $user->getAll();
+                foreach ($users as $user) {
+
+
+                    echo '
+                <tr>
+                    <td><a href="user.php?id='.$user->id.'">'.$user->id.'</a></td>
+                    <td>'.$user->first_name.'</td>
+                    <td>'.$user->last_name.'</td>
+                    <td>'.$user->email.'</td>
+                    <td>'.$user->dob.'</td>
+                    <td>'.$user->image.'</td>
+                </tr>';
+                }
+                ?>
+                </tbody>
+            </table>
+
+
         </div>
     </div>
 <?php
