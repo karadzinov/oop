@@ -43,6 +43,8 @@ class DB {
             $values[] = "'$value'";
         }
 
+
+
         $keys = implode(',', $keys);
         $values = implode(',', $values);
 

@@ -128,5 +128,18 @@ class Product extends DB
         return $this;
     }
 
+    public function save()
+    {
+        $data = [
+            "name"          => $this->name,
+            "type"          => $this->type,
+            "description"   => $this->description,
+            "price"         => $this->price,
+            "image"         => $this->image
+        ];
+        $this->update($this->id, $data);
+    }
+
+
 
 }

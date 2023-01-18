@@ -1,5 +1,5 @@
 <?php
-require_once "DB.php";
+
 
 class User extends DB
 {
@@ -14,15 +14,12 @@ class User extends DB
 
     const TABLE = 'users';
 
+    // parent::
+    // self::TABLE;
+
     public function __construct()
     {
         parent::__construct(self::TABLE);
-    }
-
-
-    public static function mnozenje($a, $b)
-    {
-        return $a * $b;
     }
 
     /**

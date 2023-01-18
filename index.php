@@ -5,6 +5,13 @@ spl_autoload_register(function ($class) {
     include 'class/' . $class . '.php';
 });
 
+$category  = new Categories();
+$category->setName("Motori");
+$category->setParentId(NULL);
+// $category->save();
+
+
+
 ?>
 
     <div class="container">
@@ -13,18 +20,9 @@ spl_autoload_register(function ($class) {
                 <?php
 
 
-
-                $p = new Product();
-
-                $product = $p->first(7);
-
-                var_dump($product->getName());
-                die();
-
-
                 $user = new User();
-                $user->setFirstName("Petko");
-                $user->setLastName("Ilevski");
+                $user->setFirstName("Petko"); // $this->first_name
+                $user->setLastName("Ilevski"); // $this->last_namee
                 $user->setEmail("mile@ilevski.com");
                 $user->setPassword("temp1234");
                 $user->setDob("1985-03-12");
@@ -34,7 +32,6 @@ spl_autoload_register(function ($class) {
 
 
                 //  echo $user->id();
-
 
                 ?>
             </div>
@@ -74,9 +71,42 @@ spl_autoload_register(function ($class) {
             </table>
 
 
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <select class="browser-default custom-select">
+                    <option>Motori</option>
+                    <option> - Honda</option>
+                    <option> -- XR 250R</option>
+                    <option> --- 4x4</option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <?php
+                    echo $category->getList();
+                    ?>
+                </select>
+
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <?php echo $category->getTree(); ?>
+
+
+            </div>
         </div>
     </div>
 <?php
+
 require_once "footer.php";
 
 ?>
