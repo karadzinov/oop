@@ -73,6 +73,16 @@ class Categories extends DB
         return $category;
     }
 
+    public function first($id)
+    {
+        $result = $this->get($id);
+        $this->id = $result->id;
+        $this->name = $result->name;
+        $this->parent_id = $result->parent_id;
+
+        return $this;
+    }
+
     public function getCategories()
     {
         return $this->getAll();

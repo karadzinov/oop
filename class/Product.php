@@ -9,6 +9,7 @@ class Product extends DB
     private $price;
     private $description;
     private $image;
+    private $cat_id;
 
 
     const TABLE = "products";
@@ -115,6 +116,22 @@ class Product extends DB
         $this->image = $image;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCatId()
+    {
+        return $this->cat_id;
+    }
+
+    /**
+     * @param mixed $cat_id
+     */
+    public function setCatId($cat_id): void
+    {
+        $this->cat_id = $cat_id;
+    }
+
     public function first($id)
     {
         $result = $this->get($id);
@@ -124,6 +141,7 @@ class Product extends DB
         $this->description = $result->description;
         $this->price = $result->price;
         $this->image = $result->image;
+        $this->cat_id = $result->cat_id;
 
         return $this;
     }
@@ -135,9 +153,25 @@ class Product extends DB
             "type"          => $this->type,
             "description"   => $this->description,
             "price"         => $this->price,
-            "image"         => $this->image
+            "image"         => $this->image,
+            "cat_id"        => $this->cat_id
         ];
         $this->update($this->id, $data);
+    }
+
+    public function create()
+    {
+        $data = [
+            "name"          => $this->name,
+            "type"          => $this->type,
+            "description"   => $this->description,
+            "price"         => $this->price,
+            "image"         => $this->image,
+            "cat_id"        => $this->cat_id
+        ];
+
+        $this->id = $this->insert($data);
+
     }
 
 
