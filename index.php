@@ -77,15 +77,7 @@ $category->setParentId(NULL);
             <div class="col-md-12">
 
                 <select class="browser-default custom-select">
-                    <option>Motori</option>
-                    <option> - Honda</option>
-                    <option> -- XR 250R</option>
-                    <option> --- 4x4</option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
+
                     <?php
                     echo $category->getList();
                     ?>
