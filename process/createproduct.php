@@ -36,16 +36,9 @@ if (isset($_POST['cat_id']) && !empty($_POST['cat_id'])) {
     $cat_id = '';
 }
 
-// $image = uploadImage($_FILES["image"], "../images/");
-$image = NULL;
-
-if(is_array($image)) {
-    print_r($image["error"]);
-    die();
-}
-
 
 $product = new Product();
+$image = $product->uploadImage($_FILES["image"], "../images/");
 $product->setName($name);
 $product->setImage($image);
 $product->setDescription($description);

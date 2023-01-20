@@ -12,6 +12,10 @@ $category->setParentId(NULL);
 
 
 
+$product = new Product();
+
+
+
 ?>
 
     <div class="container">

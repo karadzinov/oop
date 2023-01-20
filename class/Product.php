@@ -1,8 +1,13 @@
 <?php
 
 
-class Product extends DB
+class Product extends DB implements Model
 {
+
+
+    use Helper;
+
+
     private $id;
     private $name;
     private $type;

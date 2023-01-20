@@ -1,7 +1,9 @@
 <?php
 
-class Categories extends DB
+class Categories extends DB implements Model
 {
+
+    use Helper;
 
     public $id;
     public $name;
@@ -53,7 +55,7 @@ class Categories extends DB
             "parent_id" => $this->parent_id
         ];
 
-        $categories = $this->insert($data);
+        $categories = $this->update($this->id, $data);
         return $categories;
     }
 
@@ -83,6 +85,18 @@ class Categories extends DB
         return $this;
     }
 
+    public function create()
+    {
+        $data = [
+            "name"          => $this->name,
+            "parent_id"     => $this->parent_id
+        ];
+
+        $this->id = $this->insert($data);
+
+    }
+
+
     public function getCategories()
     {
         return $this->getAll();
@@ -97,13 +111,6 @@ class Categories extends DB
         foreach ($categories as $category) {
             if ($category->parent_id == 0) {
 
-                // motori i people
-
-                // <li><a href="editCategory.php?cat_id=2">Motori</a></li>
-                //  <ul><li><a href="editCategory.php?cat_id=4">Honda</li></ul>
-                // <li><a href="editCategory.php?cat_id=7">People</a></li>
-
-
                 $lists .= $this->renderNode($category);
             }
         }
@@ -114,8 +121,8 @@ class Categories extends DB
     {
         $id = $node->id;
 
-        $list = '<li><a href="/editCategory.php?cat_id=' . $node->id . '">' . $node->name . '</a> 
-                <a href="/functions/deleteCategory.php?cat_id=' . $node->id . '"> <span class="text-danger">x</span> </a>
+        $list = '<li><a href="/editcategory.php?cat_id=' . $node->id . '">' . $node->name . '</a> 
+                <a href="/process/deletecategory.php?cat_id=' . $node->id . '"> <span class="text-danger">x</span> </a>
             </li>';
         $children = $this->getChildren($id);
         $count = count($children);

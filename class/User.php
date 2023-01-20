@@ -1,7 +1,7 @@
 <?php
 
 
-class User extends DB
+class User extends DB implements Model
 {
 
     private $first_name;
@@ -25,7 +25,7 @@ class User extends DB
     /**
      * @return mixed
      */
-    public function getLastName()
+    public function getLastName(): string
     {
 
         return $this->last_name;
@@ -167,7 +167,7 @@ class User extends DB
         $this->remove($this->id);
     }
 
-    public function id()
+    public function id(): int
     {
         return $this->id;
     }

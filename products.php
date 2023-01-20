@@ -59,7 +59,7 @@ $products = $products->getAll();
                     <td>'.$product->type.'</td>
                     <td>'.mb_strimwidth(strip_tags($product->description), 0, 100, '...').'</td>
                     <td>'.$product->price.'</td>
-                    <td><img src="'.$product->image.'" alt="product"></td>
+                    <td><img src="/images/'.$product->image.'" alt="product" style="max-width: 100px;"></td>
                     <td>'.$categoryName.'</td>
                 </tr>';
             }
